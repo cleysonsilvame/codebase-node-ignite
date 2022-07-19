@@ -1,10 +1,11 @@
 import express from "express";
 
-const app = express();
+import { categoriesRoutes } from "./routes/categories.routes";
 
-app.get("/", (request, response) => {
-  return response.json({ message: "Hello World" });
-});
+const app = express();
+app.use(express.json());
+
+app.use("/categories", categoriesRoutes);
 
 app.listen(3333, () => {
   console.log("🚀 ~ file: server.ts ~ line 6 ~ app.listen ~", 3333);
