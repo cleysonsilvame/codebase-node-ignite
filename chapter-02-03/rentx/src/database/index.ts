@@ -1,7 +1,9 @@
 import { DataSource } from "typeorm";
 
 import { Category } from "../modules/cars/entities/Category";
+import { Specification } from "../modules/cars/entities/Specification";
 import { CreateCategories1658651590861 } from "./migrations/1658651590861-CreateCategories";
+import { CreateSpecifications1658728220585 } from "./migrations/1658728220585-CreateSpecifications";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -10,8 +12,11 @@ const dataSource = new DataSource({
   username: "docker",
   password: "postgres",
   database: "rentx",
-  entities: [Category],
-  migrations: [CreateCategories1658651590861],
+  entities: [Category, Specification],
+  migrations: [
+    CreateCategories1658651590861,
+    CreateSpecifications1658728220585,
+  ],
 });
 
 export function createConnection(host = "database"): Promise<DataSource> {

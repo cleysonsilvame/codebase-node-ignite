@@ -5,6 +5,8 @@ import { createConnection } from "./database";
 import { routes } from "./routes";
 import swaggerFile from "./swagger.json";
 
+import "./shared/container";
+
 createConnection()
   .then(() => {
     console.log("Data Source has been initialized!");
