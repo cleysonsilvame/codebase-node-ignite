@@ -2,20 +2,12 @@ import "express-async-errors";
 import express, { NextFunction, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 
-import { createConnection } from "./database";
-import { AppError } from "./errors/AppError";
-import { routes } from "./routes";
-import swaggerFile from "./swagger.json";
+import "@shared/infra/typeorm";
+import "@shared/container";
+import { AppError } from "@shared/errors/AppError";
+import { routes } from "@shared/infra/http/routes";
 
-import "./shared/container";
-
-createConnection()
-  .then(() => {
-    console.log("Data Source has been initialized!");
-  })
-  .catch((err) => {
-    console.error("Error during Data Source initialization", err);
-  });
+import swaggerFile from "../../../swagger.json";
 
 const app = express();
 

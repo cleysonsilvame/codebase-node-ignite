@@ -1,8 +1,9 @@
 import { DataSource } from "typeorm";
 
-import { User } from "../modules/accounts/entities/User";
-import { Category } from "../modules/cars/entities/Category";
-import { Specification } from "../modules/cars/entities/Specification";
+import { User } from "@modules/accounts/infra/typeorm/entities/User";
+import { Category } from "@modules/cars/infra/typeorm/entities/Category";
+import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
+
 import { CreateCategories1658651590861 } from "./migrations/1658651590861-CreateCategories";
 import { CreateSpecifications1658728220585 } from "./migrations/1658728220585-CreateSpecifications";
 import { CreateUsers1658729807826 } from "./migrations/1658729807826-CreateUsers";
@@ -29,5 +30,13 @@ const dataSource = new DataSource({
 export function createConnection(host = "database"): Promise<DataSource> {
   return dataSource.setOptions({ host }).initialize();
 }
+
+createConnection()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization", err);
+  });
 
 export default dataSource;
