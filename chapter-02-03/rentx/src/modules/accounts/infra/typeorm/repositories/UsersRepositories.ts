@@ -19,13 +19,13 @@ class UsersRepository implements IUsersRepository {
   }
 
   async findByEmail(email: string) {
-    const user = await this.repository.findOne({ where: { email } });
+    const user = await this.repository.findOneBy({ email });
 
     return user;
   }
 
   async findById(id: string) {
-    const user = await this.repository.findOne({ where: { id } });
+    const user = await this.repository.findOneBy({ id });
 
     return user;
   }

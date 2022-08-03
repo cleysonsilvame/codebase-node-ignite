@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
 import {
@@ -18,10 +18,18 @@ class SpecificationRepository implements ISpecificationRepository {
     const specification = this.repository.create({ name, description });
 
     await this.repository.save(specification);
+
+    return specification;
   }
 
   async findByName(name: string) {
-    const specification = await this.repository.findOne({ where: { name } });
+    const specification = await this.repository.findOneBy({ name });
+
+    return specification;
+  }
+
+  async findByIds(ids: string[]) {
+    const specification = await this.repository.findBy({ id: In(ids) });
 
     return specification;
   }

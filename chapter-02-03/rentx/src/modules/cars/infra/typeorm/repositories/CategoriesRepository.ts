@@ -30,7 +30,7 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   async findByName(name: string) {
-    const category = this.repository.findOne({ where: { name } });
+    const category = this.repository.findOneBy({ name });
 
     return category;
   }

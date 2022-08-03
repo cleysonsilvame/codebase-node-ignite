@@ -1,13 +1,22 @@
-import "express-async-errors";
 import express, { NextFunction, Request, Response } from "express";
+import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 
-import "@shared/infra/typeorm";
+// eslint-disable-next-line import-helpers/order-imports
+import { createConnection } from "@shared/infra/typeorm";
 import "@shared/container";
 import { AppError } from "@shared/errors/AppError";
 import { routes } from "@shared/infra/http/routes";
 
 import swaggerFile from "../../../swagger.json";
+
+createConnection()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization", err);
+  });
 
 const app = express();
 
