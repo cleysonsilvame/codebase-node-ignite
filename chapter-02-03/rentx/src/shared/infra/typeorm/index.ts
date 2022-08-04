@@ -5,6 +5,7 @@ import { Car } from "@modules/cars/infra/typeorm/entities/Car";
 import { CarImage } from "@modules/cars/infra/typeorm/entities/CarImage";
 import { Category } from "@modules/cars/infra/typeorm/entities/Category";
 import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
+import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 
 import { CreateCategories1658651590861 } from "./migrations/1658651590861-CreateCategories";
 import { CreateSpecifications1658728220585 } from "./migrations/1658728220585-CreateSpecifications";
@@ -14,6 +15,7 @@ import { AlterUserAddAvatar1658805475673 } from "./migrations/1658805475673-Alte
 import { CreateCars1659473403181 } from "./migrations/1659473403181-CreateCars";
 import { CreateSpecificationsCars1659527692158 } from "./migrations/1659527692158-CreateSpecificationsCars";
 import { CreateCarImages1659540475527 } from "./migrations/1659540475527-CreateCarImages";
+import { CreateRentals1659555012224 } from "./migrations/1659555012224-CreateRentals";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -22,7 +24,7 @@ const dataSource = new DataSource({
   username: "docker",
   password: "postgres",
   database: "rentx",
-  entities: [Category, Specification, User, Car, CarImage],
+  entities: [Category, Specification, User, Car, CarImage, Rental],
   migrations: [
     CreateCategories1658651590861,
     CreateSpecifications1658728220585,
@@ -32,6 +34,7 @@ const dataSource = new DataSource({
     CreateCars1659473403181,
     CreateSpecificationsCars1659527692158,
     CreateCarImages1659540475527,
+    CreateRentals1659555012224,
   ],
 });
 
