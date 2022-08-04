@@ -23,7 +23,7 @@ const dataSource = new DataSource({
   host: "localhost",
   username: "docker",
   password: "postgres",
-  database: "rentx",
+  database: process.env.NODE_ENV === "test" ? "rentx_test" : "rentx",
   entities: [Category, Specification, User, Car, CarImage, Rental],
   migrations: [
     CreateCategories1658651590861,
