@@ -1,4 +1,5 @@
 import { hash } from "bcrypt";
+import { randomUUID } from "crypto";
 
 import { createConnection } from "..";
 
@@ -8,6 +9,7 @@ import { createConnection } from "..";
   const password = await hash("admin", 8);
 
   const query = connection.createQueryBuilder().insert().into("users").values({
+    id: randomUUID(),
     name: "admin",
     password,
     email: "admin@rentx.com",

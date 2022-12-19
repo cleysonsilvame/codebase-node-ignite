@@ -35,13 +35,13 @@ describe("Authenticate User", () => {
     expect(result).toHaveProperty("token");
   });
 
-  it("should not be able to authenticate an nonexistent user", () => {
-    expect(async () => {
-      await authenticateUserUseCase.execute({
+  it("should not be able to authenticate an nonexistent user", async () => {
+    await expect(
+      authenticateUserUseCase.execute({
         email: "user@not.exists",
         password: "1234",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError("Email or password incorrect."));
   });
 
   it("should not be able to authenticate with incorrect password", async () => {
@@ -59,11 +59,11 @@ describe("Authenticate User", () => {
       password: user.password,
     });
 
-    expect(async () => {
-      await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: user.email,
         password: "incorrect password",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError("Email or password incorrect."));
   });
 });
