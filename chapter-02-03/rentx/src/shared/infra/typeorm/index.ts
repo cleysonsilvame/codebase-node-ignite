@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 
 import { User } from "@modules/accounts/infra/typeorm/entities/User";
+import { UserTokens } from "@modules/accounts/infra/typeorm/entities/UserTokens";
 import { Car } from "@modules/cars/infra/typeorm/entities/Car";
 import { CarImage } from "@modules/cars/infra/typeorm/entities/CarImage";
 import { Category } from "@modules/cars/infra/typeorm/entities/Category";
@@ -16,6 +17,7 @@ import { CreateCars1659473403181 } from "./migrations/1659473403181-CreateCars";
 import { CreateSpecificationsCars1659527692158 } from "./migrations/1659527692158-CreateSpecificationsCars";
 import { CreateCarImages1659540475527 } from "./migrations/1659540475527-CreateCarImages";
 import { CreateRentals1659555012224 } from "./migrations/1659555012224-CreateRentals";
+import { CreateUsersToken1671488252676 } from "./migrations/1671488252676-CreateUsersToken";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -24,7 +26,7 @@ const dataSource = new DataSource({
   username: "docker",
   password: "postgres",
   database: process.env.NODE_ENV === "test" ? "rentx_test" : "rentx",
-  entities: [Category, Specification, User, Car, CarImage, Rental],
+  entities: [Category, Specification, User, Car, CarImage, Rental, UserTokens],
   migrations: [
     CreateCategories1658651590861,
     CreateSpecifications1658728220585,
@@ -35,6 +37,7 @@ const dataSource = new DataSource({
     CreateSpecificationsCars1659527692158,
     CreateCarImages1659540475527,
     CreateRentals1659555012224,
+    CreateUsersToken1671488252676,
   ],
 });
 
