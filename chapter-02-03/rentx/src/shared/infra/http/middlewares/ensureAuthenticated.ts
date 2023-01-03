@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 import auth from "@config/auth";
-import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
 import { AppError } from "@shared/errors/AppError";
 
 interface IPayload {
@@ -28,18 +27,20 @@ export async function ensureAuthenticated(
       auth.secret_refresh_token
     ) as IPayload;
 
-    const usersTokensRepository = new UsersTokensRepository();
+    // const usersTokensRepository = new UsersTokensRepository();
 
-    const { user } = await usersTokensRepository.findByUserIdAndRefreshToken(
-      user_id,
-      token
-    );
+    // const { user } = await usersTokensRepository.findByUserIdAndRefreshToken(
+    //   user_id,
+    //   token
+    // );
 
-    if (!user) {
-      throw new AppError("User not found.", 401);
-    }
+    // if (!user) {
+    //   throw new AppError("User not found.", 401);
+    // }
 
-    request.user = user;
+    request.user = {
+      id: user_id,
+    };
 
     return next();
   } catch {
