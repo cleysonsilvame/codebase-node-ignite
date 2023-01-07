@@ -42,7 +42,7 @@ describe("List Categories Controller", () => {
   });
   it("should be able to list all categories", async () => {
     const {
-      body: { refresh_token },
+      body: { token },
     } = await request(app).post("/sessions").send(admin);
 
     const category = {
@@ -53,7 +53,7 @@ describe("List Categories Controller", () => {
     await request(app)
       .post("/categories")
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
       .send(category);
 
